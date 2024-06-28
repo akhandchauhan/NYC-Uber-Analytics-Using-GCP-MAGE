@@ -104,7 +104,7 @@ Mage is similar to other orchestration tools like Airflow, with one big differen
 In the BigQuery console, you can see all the dimension and fact tables have been copied. Now you can start querying from the console.
 
 1. **Create a Table for Analytics:**
-    - To create some dashboards out of the dataset, create a separate table based on this query: [analytics_query.sql](https://github.com/darshilparmar/uber-etl-pipeline-data-engineering-project/blob/main/analytics_query.sql).
+    - To create some dashboards out of the dataset, create a separate table based on the query.
     - This query joins all the required datasets and extracts relevant metrics for the final dataset necessary to show on the dashboard.
 ## Play with Dashboard!
 https://lookerstudio.google.com/reporting/f327282a-ee3f-49f9-8e4f-76b6c2a5e301
