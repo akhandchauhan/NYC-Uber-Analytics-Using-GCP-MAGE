@@ -30,5 +30,81 @@ print(df.head())
 ## Model Diagram using Lucid Chart
 ![Uber_data_model](https://github.com/akhandchauhan/Uber_data_analytics/assets/112802105/29f6962c-0b67-403d-8257-4702546f14d5)
 
+## Creating Your Account
+
+If you don’t have your own Google Cloud Platform (GCP) account, you can create a free tier account which provides you with some basic services to get started on GCP. If you need help creating the free tier account.
+
+## Loading Data into Google Cloud Storage
+
+If you have any basic idea about cloud services, you should know that for most cloud-based storage, we start with creating buckets. We similarly have to create a bucket for getting started on the project.
+
+1. **Create a Bucket:**
+    - Type in ‘Google Cloud Storage’ and get started with creating buckets.
+    - When you create the bucket, ensure that it's public so that we can access it using a URL. However, this is not the safest way to build that while working on a production-grade project.
+
+2. **Grant Public Access to the Bucket:**
+    - Once the bucket is created, upload the NYC file data into the bucket and ensure to change the permissions to make it public and accessible via URL.
+    - If you get stuck with any error, refer to the ‘Google Cloud and Mage Installation’ part of the video.
+
+## GCP Compute Engine and Install Mage
+
+Since our project requires Mage to run, we shall be installing that in our VM built using GCP’s Compute Engine.
+
+1. **Create the VM:**
+    - Ensure that the HTTP has full default access and choose a standard machine type with 4 CPU and 16 GB memory.
+    - Once the instance is created, click on ‘SSH’ to open your instance where you can start with your commands.
+
+## Run Mage on Compute Engine
+
+Once the installation is successful, run Mage using the command `mage start <project_name>`. If everything is successful, you can see Mage running on port 6789. 
+
+1. **Access Mage from Web UI:**
+    - You would need the external IP of your VM (which you can get by clicking on your VM in GCP). 
+    - Try typing in your external IP and the port to access Mage, e.g., `35.127.11.11:6789`.
+    - If you can’t access it, it's because we didn’t explicitly tell the VM to accept requests from port 6789. To remedy this, go to ‘Firewall’ in GCP and click on ‘create firewall rule’.
+
+2. **Create Firewall Rule:**
+    - In the new rule, give details and give the IP as `0.0.0.0/0` and mention the port.
+    - Create the rule to help in opening the Mage UI.
+
+## Create Files on Mage for ETL/Transformation
+
+Mage is similar to other orchestration tools like Airflow, with one big difference: Mage provides a lot of templates for loading and transforming data.
+
+1. **Mage UI:**
+    - In the API section, you can add the public URL from which the data was downloadable from Google Cloud Storage.
+    - Run the code using the run icon on top of the data loader file. The output should yield the CSV NYC data file.
+
+2. **Create a Data Transformation File:**
+    - In this file, import pandas and write the code used in Jupyter notebooks.
+    - The data outputted from the data loader file goes into the data transformation file.
+    - The transform files convert data into dataframes of different fact and dimension tables. The dataframes are converted into dictionaries passed to the next function.
+
+3. **Write Output Data into BigQuery:**
+    - Create a file with data exporter for exporting to BigQuery.
+    - Include table details for BigQuery and an `io.yaml` file with details about the GCP (BigQuery) credentials.
+    - To get the credentials, go to GCP console, type in ‘API & Services’, go to ‘create credentials’, and ‘create service account’.
+
+4. **Create Service Account:**
+    - Allow services in VM to interact with services in GCP.
+    - Add a key to the created service account, create a JSON key, and download the file.
+    - Copy and paste the credentials from the JSON file into the YAML file in Mage.
+
+5. **Create a Dataset in BigQuery:**
+    - Go to BigQuery, click on ‘create dataset’, and create a dataset with multi-region enabled.
+    - In Mage’s transformer code, add the table details with the dataset name and the table name required (e.g., `fact_table`).
+
+6. **Install Google Cloud Packages:**
+    - If you get a Google Cloud error when running the transformer code, it could be due to a lack of Google Cloud packages in the VM.
+    - Open another instance by clicking on the SSH button and install the Google Cloud packages using the commands shared in the link above.
+    - Once the transformation file is run, it will load all tables into BigQuery.
+
+## BigQuery Data Analysis
+
+In the BigQuery console, you can see all the dimension and fact tables have been copied. Now you can start querying from the console.
+
+1. **Create a Table for Analytics:**
+    - To create some dashboards out of the dataset, create a separate table based on this query: [analytics_query.sql](https://github.com/darshilparmar/uber-etl-pipeline-data-engineering-project/blob/main/analytics_query.sql).
+    - This query joins all the required datasets and extracts relevant metrics for the final dataset necessary to show on the dashboard.
 ## Play with Dashboard!
 https://lookerstudio.google.com/reporting/f327282a-ee3f-49f9-8e4f-76b6c2a5e301
