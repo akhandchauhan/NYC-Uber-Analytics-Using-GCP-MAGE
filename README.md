@@ -24,6 +24,6 @@ df = pd.read_csv('path/to/uber_data.csv')
 
 # Display the first few rows
 print(df.head())
-
+```
 ## Play with Dashboard!
 https://lookerstudio.google.com/reporting/f327282a-ee3f-49f9-8e4f-76b6c2a5e301
