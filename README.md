@@ -55,7 +55,8 @@ Since our project requires Mage to run, we shall be installing that in our VM bu
 1. **Create the VM:**
     - Ensure that the HTTP has full default access and choose a standard machine type with 4 CPU and 16 GB memory.
     - Once the instance is created, click on ‘SSH’ to open your instance where you can start with your commands.
-      ![image](https://github.com/akhandchauhan/Uber_data_engineering/assets/112802105/4543dde5-189d-40cf-a323-0758480f2fdd)
+     ![image](https://github.com/akhandchauhan/Uber_data_engineering/assets/112802105/f9820947-2b42-466d-945e-2bb308a0b295)
+
 
 
 ## Run Mage on Compute Engine
@@ -85,9 +86,8 @@ Mage is similar to other orchestration tools like Airflow, with one big differen
     - In this file, import pandas and write the code used in Jupyter notebooks.
     - The data outputted from the data loader file goes into the data transformation file.
     - The transform files convert data into dataframes of different fact and dimension tables. The dataframes are converted into dictionaries passed to the next function.
+
       ![image](https://github.com/akhandchauhan/Uber_data_engineering/assets/112802105/e3685e4d-f259-45cb-90e6-2b699985f569)
-
-
 3. **Write Output Data into BigQuery:**
     - Create a file with data exporter for exporting to BigQuery.
     - Include table details for BigQuery and an `io.yaml` file with details about the GCP (BigQuery) credentials.
