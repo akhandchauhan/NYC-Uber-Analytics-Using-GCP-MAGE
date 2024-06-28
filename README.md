@@ -9,3 +9,6 @@ The goal of this project is to perform data analytics on Uber data using various
 
 ## Services Used
 ![Services Used](https://github.com/akhandchauhan/Uber_data_analytics/assets/112802105/27bb4139-d963-41cd-b6b0-5d25fd770026)
+## Dataset 
+
+The dataset used for the analysis can be found here: [uber_data.csv](./uber_data.csv)
